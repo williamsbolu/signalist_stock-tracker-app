@@ -45,7 +45,7 @@ const UserDropdown = () => {
         </Button>
       </DropdownMenuTrigger>
 
-      <DropdownMenuContent className="text-gray-400">
+      <DropdownMenuContent className="text-gray-400" align="end">
         <DropdownMenuLabel>
           <div className="flex relative items-center gap-3 py-2">
             <Avatar className="h-10 w-10">
@@ -63,6 +63,10 @@ const UserDropdown = () => {
           </div>
         </DropdownMenuLabel>
         <DropdownMenuSeparator className="bg-gray-600" />
+        <nav className="sm:hidden">
+          <NavItems />
+        </nav>
+        <DropdownMenuSeparator className="hidden sm:block bg-gray-600" />
         <DropdownMenuItem
           onClick={handleSignOut}
           className="text-gray-100 text-md font-medium focus:bg-transparent focus:text-yellow-500 transition-colors cursor-pointer"
@@ -70,10 +74,6 @@ const UserDropdown = () => {
           <LogOut className="size-4 mr-2 hidden sm:block" />
           Logout
         </DropdownMenuItem>
-        <DropdownMenuSeparator className="hidden sm:block bg-gray-600" />
-        <nav className="sm:hidden">
-          <NavItems />
-        </nav>
       </DropdownMenuContent>
     </DropdownMenu>
   );
