@@ -109,7 +109,7 @@ export function SearchCommand({
                 {` `}({displayStocks?.length || 0})
               </div>
               {displayStocks?.map((stock, i) => (
-                <li key={stock.symbol} className="search-item">
+                <li key={`${stock.symbol}-${i}`} className="search-item">
                   <Link
                     href={`/stocks/${stock.symbol}`}
                     onClick={handleSelectStock}
