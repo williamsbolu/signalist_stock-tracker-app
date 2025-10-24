@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState, useEffect } from "react";
 import { Loader2, TrendingUp } from "lucide-react";
 
@@ -12,7 +13,7 @@ import {
 import { Button } from "./ui/button";
 import { searchStocks } from "@/lib/actions/finnhub.actions";
 import { useDebounce } from "@/hooks/useDebounce";
-import Link from "next/link";
+import WatchlistButton from "@/components/WatchlistButton";
 
 export function SearchCommand({
   renderAs = "button",
@@ -64,6 +65,16 @@ export function SearchCommand({
     setOpen(false);
     setSearchTerm("");
     setStocks(initialStocks);
+  };
+
+  // Handle watchlist changes status change
+  const handleWatchlistChange = async (symbol: string, isAdded: boolean) => {
+    // Update current stocks
+    setStocks(
+      stocks?.map((stock) =>
+        stock.symbol === symbol ? { ...stock, isInWatchlist: isAdded } : stock
+      ) || []
+    );
   };
 
   return (
@@ -122,7 +133,13 @@ export function SearchCommand({
                         {stock.symbol} | {stock.exchange} | {stock.type}
                       </div>
                     </div>
-                    {/*<Star />*/}
+                    <WatchlistButton
+                      symbol={stock.symbol}
+                      company={stock.name}
+                      isInWatchlist={stock.isInWatchlist}
+                      onWatchlistChange={handleWatchlistChange}
+                      type="icon"
+                    />
                   </Link>
                 </li>
               ))}
